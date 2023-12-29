@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:flutter/services.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
 import 'package:vtproje/Screens/item/model/item_model.dart';
+import 'package:vtproje/Screens/item/view/item_buying_view.dart';
 import 'package:vtproje/Screens/product/widgets/home_view/advert_slider.dart';
 import 'package:vtproje/Screens/product/widgets/home_view/home_page_all_products.dart';
 import 'package:vtproje/Screens/product/widgets/item_information_view/item_text_widget.dart';
@@ -17,7 +18,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   late final TabController _tabController;
-  final PageController _pageController = PageController();
+  final PageController _pageController = PageController(initialPage: 1);
   List<String> imagePaths = [
     "assets/images/vase.jpg",
     "assets/images/vase_hanmade.jpg",
@@ -73,6 +74,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     super.initState();
     _tabController =
         TabController(length: _MyTabViews.values.length, vsync: this);
+    _tabController.index = 1;
   }
 
   @override
@@ -117,7 +119,21 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
       controller: _tabController,
       labelColor: ColorConstants.orangeColor,
       unselectedLabelColor: Colors.black,
-      onTap: (int index) {},
+      onTap: (int index) {
+        if (index == 1) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return const HomeView();
+            },
+          ));
+        } else if (index == 0) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return ItemBuyView(userModel: userModel);
+            },
+          ));
+        }
+      },
       tabs: _MyTabViews.values
           .map((e) => Tab(
                 icon: e.index == 0
