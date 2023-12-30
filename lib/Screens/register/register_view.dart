@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
+import 'package:vtproje/Screens/login/login_view.dart';
 import 'package:vtproje/Screens/product/widgets/login/custom_button/custom_button.dart';
 import 'package:vtproje/Screens/product/widgets/login/custom_text_widget.dart';
 import 'package:vtproje/Screens/product/widgets/login/form_field/form_field.dart';
-import 'package:vtproje/Screens/register/register_view.dart';
 
-class LogInView extends StatelessWidget {
-  const LogInView({Key? key});
+class RegisterView extends StatelessWidget {
+  const RegisterView({Key? key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController fullNameController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
     TextEditingController usernameController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     return SafeArea(
@@ -39,11 +41,26 @@ class LogInView extends StatelessWidget {
                     ),
                   ),
                 ),
-                const CustomTextWidget(textString: "Welcome", fontSize: 35),
                 const CustomTextWidget(
-                    textString: "Sign in to continue", fontSize: 25),
+                    textString: "Create An Account", fontSize: 25),
                 Padding(
                   padding: const EdgeInsets.only(top: 30.0),
+                  child: CustomFormField(
+                    isPassword: false,
+                    text: "Full Name",
+                    controller: fullNameController,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: CustomFormField(
+                    isPassword: false,
+                    text: "Email",
+                    controller: emailController,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
                   child: CustomFormField(
                     isPassword: false,
                     text: "Username",
@@ -63,7 +80,7 @@ class LogInView extends StatelessWidget {
                   child: CustomButton(
                     usernameController: TextEditingController(),
                     passwordController: TextEditingController(),
-                    buttonText: "Sign In",
+                    buttonText: "Sign Up",
                   ),
                 ),
                 Padding(
@@ -72,7 +89,7 @@ class LogInView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CustomTextWidget(
-                        textString: "Don't have an account? ",
+                        textString: "Do you have an account? ",
                         fontSize: 15,
                       ),
                       InkWell(
@@ -80,12 +97,12 @@ class LogInView extends StatelessWidget {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) =>
-                                  RegisterView(), // Navigate to the login page
+                                  LogInView(), // Navigate to the login page
                             ),
                           );
                         },
                         child: CustomTextWidget(
-                          textString: "Sign Up",
+                          textString: "Sign In",
                           fontSize: 15,
                           textColor: ColorConstants.orangeColor,
                           fontWeight: FontWeight.bold,

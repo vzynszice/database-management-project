@@ -1,49 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:vtproje/Screens/constants/color_constants.dart';
 
 class CustomButton extends StatelessWidget {
   final TextEditingController usernameController;
   final TextEditingController passwordController;
-  final double height;
-  final double width;
+  final String buttonText;
+
   //final Function(BuildContext, String, String) onPressed;
 
   const CustomButton({
     Key? key,
     required this.usernameController,
     required this.passwordController,
-    required this.height,
-    required this.width,
+    required this.buttonText,
 
     //required this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
     return Container(
-      height: size.height * height,
-      width: size.width * width,
+      height: 40,
+      width: 330,
       decoration: const BoxDecoration(
-        color: Color(0xffe86f11),
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        color: ColorConstants.orangeColor,
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: OutlinedButton(
         onPressed: () {
           //onPressed(context, usernameController.text, passwordController.text);
         },
         style: OutlinedButton.styleFrom(
-          foregroundColor: const Color(0xff4187f4),
+          foregroundColor: ColorConstants.orangeColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
-        child: const Text(
-          "Sign In",
-          style: TextStyle(
+        child: Text(
+          buttonText,
+          style: const TextStyle(
+            fontFamily: 'Francois One',
             color: Colors.black,
             fontSize: 22,
-            fontWeight: FontWeight.bold,
           ),
         ),
       ),

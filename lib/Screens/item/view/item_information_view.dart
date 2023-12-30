@@ -34,98 +34,101 @@ class _ItemInformationViewState extends State<ItemInformationView> {
           style: TextStyle(fontFamily: 'Francois One', fontSize: 25),
         ),
       ),
-      body: Column(children: [
-        Container(
-          height: 620,
-          width: MediaQuery.of(context).size.width,
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadiusDirectional.only(
-                  bottomStart: Radius.circular(30),
-                  bottomEnd: Radius.circular(30)),
-              color: Color(0xFFFFFFFF)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadiusDirectional.only(
-                        bottomStart: Radius.circular(30),
-                        bottomEnd: Radius.circular(30)),
-                    color: ColorConstants.greyTransparent),
-                height: 370,
-                width: MediaQuery.of(context).size.width,
-                child: Image.asset(
-                  widget.itemModel.imagePath,
-                  fit: BoxFit.contain,
+      body: SingleChildScrollView(
+        child: Column(children: [
+          Container(
+            height: 620,
+            width: MediaQuery.of(context).size.width,
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadiusDirectional.only(
+                    bottomStart: Radius.circular(30),
+                    bottomEnd: Radius.circular(30)),
+                color: Color(0xFFFFFFFF)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadiusDirectional.only(
+                          bottomStart: Radius.circular(30),
+                          bottomEnd: Radius.circular(30)),
+                      color: ColorConstants.greyTransparent),
+                  height: 370,
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.asset(
+                    widget.itemModel.imagePath,
+                    fit: BoxFit.contain,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: Row(
-                  children: [
-                    ItemTextWidget(
-                      textString: widget.itemModel.name,
-                      fontSize: 20,
-                      padding: PaddingConstants.nameTextPadding,
-                    ),
-                    ItemTextWidget(
-                      textString: "${widget.itemModel.price} TL",
-                      fontSize: 22,
-                      padding: PaddingConstants.priceTextPadding,
-                      textColor: ColorConstants.orangeColor,
-                    )
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Row(
+                    children: [
+                      ItemTextWidget(
+                        textString: widget.itemModel.name,
+                        fontSize: 20,
+                        padding: PaddingConstants.nameTextPadding,
+                      ),
+                      ItemTextWidget(
+                        textString: "${widget.itemModel.price} TL",
+                        fontSize: 22,
+                        padding: PaddingConstants.priceTextPadding,
+                        textColor: ColorConstants.orangeColor,
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              ItemTextWidget(
-                  textString: "Item: ${widget.itemModel.id}",
+                ItemTextWidget(
+                    textString: "Item: ${widget.itemModel.id}",
+                    fontSize: 15,
+                    padding: PaddingConstants.idTextPadding),
+                ItemTextWidget(
+                  textString: widget.itemModel.seller,
                   fontSize: 15,
-                  padding: PaddingConstants.idTextPadding),
-              ItemTextWidget(
-                textString: widget.itemModel.seller,
-                fontSize: 15,
-                padding: PaddingConstants.idTextPadding,
-                textColor: Colors.grey,
-              ),
-              const ItemTextWidget(
-                  textString: 'Description',
-                  fontSize: 20,
-                  padding: PaddingConstants.descriptionTextPadding),
-              ItemTextWidget(
-                textString: widget.itemModel.description,
-                fontSize: 13,
-                padding: PaddingConstants.descriptionSubPadding,
-                textColor: Colors.grey,
-              )
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 18.0, left: 230, right: 10),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(7),
-                )),
-            child: const Center(
-              child: Text(
-                'Buy Now',
-                style: TextStyle(
-                    fontFamily: 'Francois One',
-                    fontSize: 17,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.black),
-              ),
+                  padding: PaddingConstants.idTextPadding,
+                  textColor: Colors.grey,
+                ),
+                const ItemTextWidget(
+                    textString: 'Description',
+                    fontSize: 20,
+                    padding: PaddingConstants.descriptionTextPadding),
+                ItemTextWidget(
+                  textString: widget.itemModel.description,
+                  fontSize: 13,
+                  padding: PaddingConstants.descriptionSubPadding,
+                  textColor: Colors.grey,
+                )
+              ],
             ),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return ItemBuyView(userModel: widget.userModel);
-              }));
-            },
           ),
-        )
-      ]),
+          Padding(
+            padding: const EdgeInsets.only(top: 18.0, left: 230, right: 10),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(7),
+                  )),
+              child: const Center(
+                child: Text(
+                  'Buy Now',
+                  style: TextStyle(
+                      fontFamily: 'Francois One',
+                      fontSize: 17,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.black),
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return ItemBuyView(userModel: widget.userModel);
+                }));
+              },
+            ),
+          )
+        ]),
+      ),
     );
   }
 }
