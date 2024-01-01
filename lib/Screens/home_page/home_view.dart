@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 //import 'package:flutter/services.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
 import 'package:vtproje/Screens/item/model/item_model.dart';
-import 'package:vtproje/Screens/item/view/item_buying_view.dart';
 import 'package:vtproje/Screens/product/widgets/home_view/advert_slider.dart';
-import 'package:vtproje/Screens/product/widgets/home_view/home_page_all_products.dart';
+import 'package:vtproje/Screens/product/widgets/home_view/all_products.dart';
 import 'package:vtproje/Screens/product/widgets/item_information_view/item_text_widget.dart';
 import 'package:vtproje/Screens/product/widgets/home_view/search_text_field.dart';
 import 'package:vtproje/Screens/shopping_cart/shopping_cart_view.dart';
 import 'package:vtproje/Screens/user/model/user_model.dart';
+import 'package:vtproje/Screens/user/view/user_information_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -104,7 +104,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 4.0),
-                child: AllProducts(itemModels: itemModels),
+                child: AllProducts(),
               )
             ],
           ),
@@ -130,7 +130,9 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         } else if (index == 0) {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
-              return ItemBuyView(userModel: userModel);
+              return UserInformationView(
+                userModel: userModel,
+              );
             },
           ));
         } else if (index == 2) {
