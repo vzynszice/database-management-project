@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:vtproje/Screens/filter_menu/filter_menu_view.dart';
 import 'package:vtproje/Screens/home_page/home_view.dart';
 import 'package:vtproje/Screens/login/login_view.dart';
 import 'package:vtproje/Screens/register/register_view.dart';
+import 'package:vtproje/Screens/shopping_cart/shopping_cart_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
         0);  */ //Item Information Viewlar için yazıldı
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LogInView(),
+      home: ShoppingCartView(),
     );
   }
 }

@@ -77,7 +77,7 @@ class RegisterView extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 35.0),
-                  child: CustomButton(
+                  child: CustomAuthButton(
                     usernameController: TextEditingController(),
                     passwordController: TextEditingController(),
                     buttonText: "Sign Up",
@@ -96,8 +96,7 @@ class RegisterView extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  LogInView(), // Navigate to the login page
+                              builder: (context) => LogInView(),
                             ),
                           );
                         },

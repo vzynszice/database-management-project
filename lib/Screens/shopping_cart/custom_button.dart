@@ -2,20 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
 import 'package:vtproje/Screens/product/widgets/login/custom_text_widget.dart';
 
-class CustomAuthButton extends StatelessWidget {
-  final TextEditingController usernameController;
-  final TextEditingController passwordController;
+class CustomButton extends StatelessWidget {
   final String buttonText;
 
   //final Function(BuildContext, String, String) onPressed;
 
-  const CustomAuthButton({
+  const CustomButton({
     Key? key,
-    required this.usernameController,
-    required this.passwordController,
     required this.buttonText,
-
-    //required this.onPressed,
+    //  required this.onPressed,
   }) : super(key: key);
 
   @override

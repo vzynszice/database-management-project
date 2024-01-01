@@ -7,6 +7,7 @@ import 'package:vtproje/Screens/product/widgets/home_view/advert_slider.dart';
 import 'package:vtproje/Screens/product/widgets/home_view/home_page_all_products.dart';
 import 'package:vtproje/Screens/product/widgets/item_information_view/item_text_widget.dart';
 import 'package:vtproje/Screens/product/widgets/home_view/search_text_field.dart';
+import 'package:vtproje/Screens/shopping_cart/shopping_cart_view.dart';
 import 'package:vtproje/Screens/user/model/user_model.dart';
 
 class HomeView extends StatefulWidget {
@@ -130,6 +131,12 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
               return ItemBuyView(userModel: userModel);
+            },
+          ));
+        } else if (index == 2) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return ShoppingCartView();
             },
           ));
         }
