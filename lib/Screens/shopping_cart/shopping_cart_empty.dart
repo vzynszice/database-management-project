@@ -20,15 +20,15 @@ class ShoppingCarEmpty extends StatelessWidget {
         fontSize: 18,
         textColor: Colors.grey.shade500,
       ),
-      Padding(
-        padding: const EdgeInsets.only(top: 8),
+      const Padding(
+        padding: EdgeInsets.only(top: 8),
         child: CustomTextWidget(
           textString: "Fortunately, there's an easy solution.",
           fontSize: 20,
         ),
       ),
-      Padding(
-        padding: const EdgeInsets.only(top: 50),
+      const Padding(
+        padding: EdgeInsets.only(top: 50),
         child: CustomButton(buttonText: "Go Shopping"),
       ),
     ]);

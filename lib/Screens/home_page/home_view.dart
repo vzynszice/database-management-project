@@ -19,7 +19,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   late final TabController _tabController;
-  final PageController _pageController = PageController(initialPage: 1);
+  //final PageController _pageController = PageController(initialPage: 1);
   List<String> imagePaths = [
     "assets/images/vase.jpg",
     "assets/images/vase_hanmade.jpg",
@@ -138,7 +138,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         } else if (index == 2) {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
-              return ShoppingCartView();
+              return const ShoppingCartView();
             },
           ));
         }

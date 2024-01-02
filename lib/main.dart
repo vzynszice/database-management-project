@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:vtproje/Screens/filter_menu/filter_menu_view.dart';
+import 'package:postgres/postgres.dart';
+//import 'package:vtproje/Screens/filter_menu/filter_menu_view.dart';
 import 'package:vtproje/Screens/home_page/home_view.dart';
 
-void main() {
+Future<void> main() async {
+  final connection = PostgreSQLConnection(
+    '10.0.2.2', // Replace with your PostgreSQL server host
+    5432, // Replace with your PostgreSQL server port
+    'hobby_market', // Replace with your database name
+    username: 'postgres', // Replace with your username
+    password: '3469', // Replace with your password
+  );
+  await connection.open();
+  final result = await connection.query('SELECT * FROM items');
+  final rows = result.affectedRowCount;
+  print(rows);
   runApp(const MyApp());
 }
 

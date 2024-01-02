@@ -4,7 +4,7 @@ import 'package:vtproje/Screens/item/model/purchased_item_model.dart';
 import 'package:vtproje/Screens/product/widgets/login/custom_text_widget.dart';
 import 'package:vtproje/Screens/shopping_cart/shopping_cart_body.dart';
 import 'package:vtproje/Screens/shopping_cart/shopping_cart_empty.dart';
-import 'package:vtproje/Screens/shopping_cart/shopping_list.dart';
+//import 'package:vtproje/Screens/shopping_cart/shopping_list.dart';
 
 class ShoppingCartView extends StatelessWidget {
   const ShoppingCartView({super.key});
@@ -132,12 +132,13 @@ class ShoppingCartView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: CustomTextWidget(textString: "Shopping Cart", fontSize: 22),
+          title:
+              const CustomTextWidget(textString: "Shopping Cart", fontSize: 22),
           backgroundColor: Colors.transparent,
         ),
         backgroundColor: const Color(0xfff5f6f8),
         body: purchasedItems.isEmpty
-            ? ShoppingCarEmpty()
+            ? const ShoppingCarEmpty()
             : ShoppingCartBody(
                 purchasedItems: purchasedItems,
               ),
