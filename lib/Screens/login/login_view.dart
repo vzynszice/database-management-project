@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:vtproje/Database/database_service.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
-import 'package:vtproje/Screens/product/widgets/login/custom_button/custom_button.dart';
+import 'package:vtproje/Screens/product/widgets/login/custom_button/custom_login_button.dart';
 import 'package:vtproje/Screens/product/widgets/login/custom_text_widget.dart';
 import 'package:vtproje/Screens/product/widgets/login/form_field/form_field.dart';
 import 'package:vtproje/Screens/register/register_view.dart';
 
 class LogInView extends StatelessWidget {
-  const LogInView({Key? key});
-
+  const LogInView({
+    super.key,
+    required this.dataBaseService,
+  });
+  final DataBaseService dataBaseService;
   @override
   Widget build(BuildContext context) {
     TextEditingController usernameController = TextEditingController();
@@ -58,20 +62,15 @@ class LogInView extends StatelessWidget {
                     controller: passwordController,
                   ),
                 ),
+                const Padding(
+                    padding: EdgeInsets.only(top: 35.0),
+                    child: LogInButton(buttonText: "Sign In")),
                 Padding(
-                  padding: const EdgeInsets.only(top: 35.0),
-                  child: CustomAuthButton(
-                    usernameController: TextEditingController(),
-                    passwordController: TextEditingController(),
-                    buttonText: "Sign In",
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CustomTextWidget(
+                      const CustomTextWidget(
                         textString: "Don't have an account? ",
                         fontSize: 15,
                       ),
@@ -79,11 +78,13 @@ class LogInView extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => RegisterView(),
+                              builder: (context) => RegisterView(
+                                dataBaseService: dataBaseService,
+                              ),
                             ),
                           );
                         },
-                        child: CustomTextWidget(
+                        child: const CustomTextWidget(
                           textString: "Sign Up",
                           fontSize: 15,
                           textColor: ColorConstants.orangeColor,
