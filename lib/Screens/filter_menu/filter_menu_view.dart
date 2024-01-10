@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
 import 'package:vtproje/Screens/filter_menu/custom_filter_form_field.dart';
 import 'package:vtproje/Screens/item/model/category_model.dart';
-import 'package:vtproje/Screens/product/widgets/login/custom_text_widget.dart';
+import 'package:vtproje/product/widgets/login/custom_text_widget.dart';
 import 'package:vtproje/Screens/shopping_cart/custom_button.dart';
 
 class FilterMenuView extends StatefulWidget {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vtproje/Screens/item/model/item_model.dart';
 import 'package:vtproje/Screens/item/model/purchased_item_model.dart';
-import 'package:vtproje/Screens/product/widgets/login/custom_text_widget.dart';
+import 'package:vtproje/product/widgets/login/custom_text_widget.dart';
 import 'package:vtproje/Screens/shopping_cart/shopping_cart_body.dart';
 import 'package:vtproje/Screens/shopping_cart/shopping_cart_empty.dart';
 //import 'package:vtproje/Screens/shopping_cart/shopping_list.dart';

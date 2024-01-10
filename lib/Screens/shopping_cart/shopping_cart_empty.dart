@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vtproje/Screens/product/widgets/login/custom_text_widget.dart';
+import 'package:vtproje/product/widgets/login/custom_text_widget.dart';
 import 'package:vtproje/Screens/shopping_cart/custom_button.dart';
 
 class ShoppingCarEmpty extends StatelessWidget {

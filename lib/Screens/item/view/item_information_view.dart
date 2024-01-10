@@ -4,7 +4,7 @@ import 'package:vtproje/Screens/constants/color_constants.dart';
 import 'package:vtproje/Screens/constants/padding_constants.dart';
 import 'package:vtproje/Screens/item/model/item_model.dart';
 import 'package:vtproje/Screens/item/view/item_buying_view.dart';
-import 'package:vtproje/Screens/product/widgets/item_information_view/item_text_widget.dart';
+import 'package:vtproje/product/widgets/item_information_view/item_text_widget.dart';
 import 'package:vtproje/Screens/user/model/user_model.dart';
 
 class ItemInformationView extends StatefulWidget {

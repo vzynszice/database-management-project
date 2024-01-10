@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
 import 'package:vtproje/Screens/constants/padding_constants.dart';
-import 'package:vtproje/Screens/product/widgets/item_information_view/item_text_widget.dart';
-import 'package:vtproje/Screens/product/widgets/item_buying_view/payment_buttons.dart';
+import 'package:vtproje/product/widgets/item_information_view/item_text_widget.dart';
+import 'package:vtproje/product/widgets/item_buying_view/payment_buttons.dart';
 import 'package:vtproje/Screens/user/model/user_model.dart';
 
 class ItemBuyView extends StatefulWidget {

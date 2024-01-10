@@ -3,7 +3,7 @@ import 'package:vtproje/Database/database_service.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
 import 'package:vtproje/Screens/item/model/item_model.dart';
 import 'package:vtproje/Screens/item/model/purchased_item_model.dart';
-import 'package:vtproje/Screens/product/widgets/login/custom_text_widget.dart';
+import 'package:vtproje/product/widgets/login/custom_text_widget.dart';
 
 class ShoppingListItemWidget extends StatefulWidget {
   final PurchasedItemModel purchasedItemModel;
@@ -23,7 +23,7 @@ class _ShoppingListItemWidgetState extends State<ShoppingListItemWidget> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             color: Colors.white),
         child: Row(

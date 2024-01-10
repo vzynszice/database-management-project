@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:vtproje/Database/database_service.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
-import 'package:vtproje/Screens/product/widgets/login/custom_button/custom_login_button.dart';
-import 'package:vtproje/Screens/product/widgets/login/custom_text_widget.dart';
-import 'package:vtproje/Screens/product/widgets/login/form_field/form_field.dart';
+import 'package:vtproje/product/widgets/login/custom_button/custom_login_button.dart';
+import 'package:vtproje/product/widgets/login/custom_text_widget.dart';
+import 'package:vtproje/product/widgets/login/form_field/form_field.dart';
 import 'package:vtproje/Screens/register/register_view.dart';
 
-class LogInView extends StatelessWidget {
+class LogInView extends StatefulWidget {
   const LogInView({
     super.key,
     required this.dataBaseService,
   });
   final DataBaseService dataBaseService;
+
+  @override
+  State<LogInView> createState() => _LogInViewState();
+}
+
+class _LogInViewState extends State<LogInView> {
   @override
   Widget build(BuildContext context) {
     TextEditingController usernameController = TextEditingController();
@@ -62,9 +68,14 @@ class LogInView extends StatelessWidget {
                     controller: passwordController,
                   ),
                 ),
-                const Padding(
-                    padding: EdgeInsets.only(top: 35.0),
-                    child: LogInButton(buttonText: "Sign In")),
+                Padding(
+                    padding: const EdgeInsets.only(top: 35.0),
+                    child: LogInButton(
+                      buttonText: "Sign In",
+                      dataBaseService: widget.dataBaseService,
+                      usernameController: usernameController,
+                      passwordController: passwordController,
+                    )),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Row(
@@ -79,7 +90,7 @@ class LogInView extends StatelessWidget {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => RegisterView(
-                                dataBaseService: dataBaseService,
+                                dataBaseService: widget.dataBaseService,
                               ),
                             ),
                           );

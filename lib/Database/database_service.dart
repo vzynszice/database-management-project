@@ -47,33 +47,51 @@ class DataBaseService {
     }
   }
 
-  Future<void> login(
-    String userName,
+  Future<UserModel?> login(
+    String username,
     String password,
   ) async {
     try {
       var user = await _connection.query(
-        'SELECT * FROM users WHERE userName = @userName AND password = @password',
+        'SELECT * FROM users WHERE userName = @username AND password = @password',
         substitutionValues: {
-          'userName': userName,
+          'username': username,
           'password': password,
         },
       );
+
       if (user.isNotEmpty) {
         print('Login successful. User information: ${user.first}');
-        userModel.userName = user.first[0] as String;
-        userModel.name = user.first[2] as String;
-        userModel.phoneNumber = user.first[3] as String;
-        userModel.email = user.first[4] as String;
-        userModel.age = user.first[5] as int;
-        userModel.address = user.first[6] as String;
-        userModel.purchasedItems = user.first[7] as int;
-        userModel.balance = user.first[8] as int;
+        var userData = user.first;
+
+        // Initialize userModel before assigning its fields
+        userModel = UserModel(
+          userData[0] as String,
+          userData[1] as String,
+          userData[2] as String,
+          userData[3] as int,
+          userData[4] as String,
+          userData[5] as String,
+          userData[7] as int,
+          userData[8] as int,
+          /* userData[0] as String,
+          userData[1] as String,
+          userData[2] as String,
+          userData[4] as String,
+          userData[3] as String,
+          userData[5] as int,
+          userData[8] as int,
+          userData[7] as int, */
+        );
+
+        return userModel;
       } else {
         print('Invalid username or password');
+        return null;
       }
     } catch (e) {
-      print('Error inserting record: $e');
+      print('Error login $e');
+      return null;
     }
   }
 
@@ -92,7 +110,7 @@ class DataBaseService {
           int itemCategoryId = item[4];
           String itemDescription = item[5];
           String sellerUsername = item[6];
-
+          String imagePath = item[7];
           var currentItem = ItemModel(
             itemId,
             itemPrice,
@@ -101,7 +119,7 @@ class DataBaseService {
             itemCategoryId,
             itemDescription,
             sellerUsername,
-            "imagePath",
+            imagePath,
           );
 
           itemList.add(currentItem);
@@ -117,6 +135,49 @@ class DataBaseService {
     } catch (e) {
       print('Error retrieving items: $e');
       return [];
+    }
+  }
+  /* _connection.query(
+        'SELECT * FROM users WHERE userName = @username AND password = @password',
+        substitutionValues: {
+          'username': username,
+          'password': password,
+        }, */
+
+  Future<void> updateChanges(
+      UserModel userModel, int index, String value) async {
+    try {
+      if (index == 0) {
+        await _connection.query(
+            'UPDATE users SET username= @username WHERE username <> @username',
+            substitutionValues: {'username': value});
+        print("username updated");
+      } else if (index == 1) {
+        await _connection.query(
+            'UPDATE users SET phone_number= @phone_number WHERE phone_number <> @phone_number and username=@username',
+            substitutionValues: {
+              'phone_number': value,
+              'username': userModel.userName
+            });
+        print("user phone_number updated");
+      } else if (index == 2) {
+        await _connection.query(
+            'UPDATE users SET email= @email WHERE email <> @email',
+            substitutionValues: {'email': value});
+        print("user email updated");
+      } else if (index == 3) {
+        int age = int.parse(value);
+        await _connection.query('UPDATE users SET age= @age WHERE age <> @age',
+            substitutionValues: {'age': age});
+        print("age updated");
+      } else if (index == 4) {
+        await _connection.query(
+            'UPDATE users SET address=@address WHERE address <> @address',
+            substitutionValues: {'address': value});
+        print("address updated");
+      }
+    } catch (e) {
+      print("Error while updating user informations $e");
     }
   }
 

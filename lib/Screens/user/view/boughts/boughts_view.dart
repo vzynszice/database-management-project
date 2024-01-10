@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
-import 'package:vtproje/Screens/product/widgets/home_view/all_products.dart';
-import 'package:vtproje/Screens/product/widgets/login/custom_text_widget.dart';
+import 'package:vtproje/Screens/item/model/item_model.dart';
+import 'package:vtproje/product/widgets/home_view/all_products.dart';
+import 'package:vtproje/product/widgets/login/custom_text_widget.dart';
 
 class BoughtSoldProductsView extends StatefulWidget {
   const BoughtSoldProductsView({super.key, required this.headlineString});
@@ -11,6 +12,7 @@ class BoughtSoldProductsView extends StatefulWidget {
 }
 
 class _BoughtSoldProductsViewState extends State<BoughtSoldProductsView> {
+  ItemModel itemModel = ItemModel(0, 0, 0, "", 0, "", "", "");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +30,9 @@ class _BoughtSoldProductsViewState extends State<BoughtSoldProductsView> {
           children: [
             Padding(
                 padding: const EdgeInsets.only(top: 15, left: 1, right: 1),
-                child: AllProducts())
+                child: AllProducts(
+                  itemModels: [itemModel],
+                ))
           ],
         ),
       ),
