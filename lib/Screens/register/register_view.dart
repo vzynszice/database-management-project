@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vtproje/Database/database_service.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
 import 'package:vtproje/Screens/login/login_view.dart';
-import 'package:vtproje/Screens/product/widgets/login/custom_button/custom_button.dart';
+import 'package:vtproje/Screens/product/widgets/login/custom_button/custom_auth_button.dart';
 import 'package:vtproje/Screens/product/widgets/login/custom_text_widget.dart';
 import 'package:vtproje/Screens/product/widgets/login/form_field/form_field.dart';
 

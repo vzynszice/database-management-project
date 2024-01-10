@@ -56,10 +56,10 @@ class InputDecorators {
               : (index == 2
                   ? userModel.email
                   : (index == 3
-                      ? userModel.birthDate
+                      ? userModel.age.toString()
                       : (index == 4
                           ? userModel.address
-                          : userModel.budget.toString())))),
+                          : userModel.balance.toString())))),
       helperStyle: const TextStyle(
           color: Colors.grey, fontSize: 13, fontFamily: 'Francois One'),
       labelText: labelString,

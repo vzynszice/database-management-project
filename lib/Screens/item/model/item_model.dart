@@ -7,12 +7,13 @@ class ItemModel {
 
   int id;
   int price;
+  int sellCount;
   String name;
   int categoryId;
   String description;
-  String seller;
+  String sellerUsername;
   String imagePath;
 
-  ItemModel(this.id, this.price, this.name, this.categoryId, this.description,
-      this.seller, this.imagePath);
+  ItemModel(this.id, this.price, this.sellCount, this.name, this.categoryId,
+      this.description, this.sellerUsername, this.imagePath);
 }

@@ -53,7 +53,7 @@ class _ItemBuyViewState extends State<ItemBuyView> {
                   color: ColorConstants.orangeColor,
                 ),
                 title: ItemTextWidget(
-                  textString: "YOUR BUDGET: ${widget.userModel.budget} TL",
+                  textString: "YOUR BUDGET: ${widget.userModel.balance} TL",
                   fontSize: 25,
                   padding: const EdgeInsets.all(5),
                 ),

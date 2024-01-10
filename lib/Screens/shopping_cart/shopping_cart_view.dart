@@ -15,7 +15,7 @@ class ShoppingCartView extends StatelessWidget {
     double price = 100;
     double total = shippingFee + price;
     List<PurchasedItemModel>? purchasedItems = [
-      PurchasedItemModel(
+      /*  PurchasedItemModel(
           ItemModel(
               5,
               100,
@@ -124,7 +124,7 @@ class ShoppingCartView extends StatelessWidget {
               "skldnfkdsnflkdsnfdsf dskjfdsjfbskdjfb skdjfnkjdsfbkjdfbsdf",
               "Batuhan",
               "assets/images/soap.png"),
-          5)
+          5)*/
     ];
 
     return SafeArea(

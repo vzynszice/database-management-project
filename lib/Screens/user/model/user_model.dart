@@ -10,11 +10,12 @@ class UserModel {
   String userName;
   String phoneNumber;
   String email;
-  String birthDate;
+  int age;
   String address;
-  int budget;
+  int balance;
   int purchasedItems = 0;
+  String name;
 
-  UserModel(this.userName, this.phoneNumber, this.email, this.birthDate,
-      this.address, this.budget, this.purchasedItems);
+  UserModel(this.userName, this.name, this.phoneNumber, this.email, this.age,
+      this.address, this.balance, this.purchasedItems);
 }

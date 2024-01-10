@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vtproje/Database/database_service.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
 import 'package:vtproje/Screens/constants/padding_constants.dart';
 import 'package:vtproje/Screens/item/model/item_model.dart';
@@ -16,6 +17,22 @@ class ItemInformationView extends StatefulWidget {
 }
 
 class _ItemInformationViewState extends State<ItemInformationView> {
+  DataBaseService dataBaseService = DataBaseService();
+  late String sellerName;
+  @override
+  void initState() {
+    super.initState();
+    fetchSellerName();
+  }
+
+  void fetchSellerName() async {
+    String name =
+        await dataBaseService.getSellerName(widget.itemModel.sellerUsername);
+    setState(() {
+      sellerName = name;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +100,7 @@ class _ItemInformationViewState extends State<ItemInformationView> {
                     fontSize: 15,
                     padding: PaddingConstants.idTextPadding),
                 ItemTextWidget(
-                  textString: widget.itemModel.seller,
+                  textString: sellerName,
                   fontSize: 15,
                   padding: PaddingConstants.idTextPadding,
                   textColor: Colors.grey,

@@ -94,10 +94,10 @@ void takingNewValues(int index, UserModel userModel, String value) {
   } else if (index == 2) {
     userModel.email = value;
   } else if (index == 3) {
-    userModel.birthDate = value;
+    userModel.age = int.parse(value);
   } else if (index == 4) {
     userModel.address = value;
   } else {
-    userModel.budget = int.parse(value);
+    userModel.balance = int.parse(value);
   }
 }

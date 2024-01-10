@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vtproje/Database/database_service.dart';
 //import 'package:flutter/services.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
 import 'package:vtproje/Screens/item/model/item_model.dart';
@@ -20,53 +21,13 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   late final TabController _tabController;
   //final PageController _pageController = PageController(initialPage: 1);
+  DataBaseService dataBaseService = DataBaseService();
   List<String> imagePaths = [
     "assets/images/vase.jpg",
     "assets/images/vase_hanmade.jpg",
     "assets/images/candle_holder.jpg",
   ];
-  List<ItemModel> itemModels = [
-    ItemModel(
-        5,
-        100,
-        "Handmade Candle",
-        47,
-        "skldnfkdsnflkdsnfdsf dskjfdsjfbskdjfb skdjfnkjdsfbkjdfbsdf",
-        "Batuhan",
-        "assets/images/soap.png"),
-    ItemModel(
-        6,
-        200,
-        "Handmade Basket",
-        54,
-        "skldnfkdsnflkdsnfdsf dskjfdsjfbskdjfb skdjfnkjdsfbkjdfbsdf",
-        "Ayse",
-        "assets/images/handmade_basket.png"),
-    ItemModel(
-        12,
-        540,
-        "Handmade Flower Pot",
-        98,
-        "skldnfkdsnflkdsnfdsf dskjfdsjfbskdjfb skdjfnkjdsfbkjdfbsdf",
-        "Hiranur",
-        "assets/images/handmade_flower_pot.png"),
-    ItemModel(
-        17,
-        740,
-        "Handmade Mask",
-        23,
-        "skldnfkdsnflkdsnfdsf dskjfdsjfbskdjfb skdjfnkjdsfbkjdfbsdf",
-        "Elif",
-        "assets/images/handmade_mask.png"),
-  ];
-  final UserModel userModel = UserModel(
-      "Batuhan",
-      "121543133",
-      "batuhan@outlook.com",
-      "20.02.2003",
-      "Şehitlik Mah. 13 Eylül Cad. Kadı Sok. 5/7 Daire No:3 Polatlı/ANKARA",
-      780,
-      0);
+  List<ItemModel> itemModels = [];
   final key = GlobalKey();
   FocusNode focusNodeTextFieldOne = FocusNode();
   FocusNode focusNodeTextFieldTwo = FocusNode();
@@ -76,6 +37,21 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
     _tabController =
         TabController(length: _MyTabViews.values.length, vsync: this);
     _tabController.index = 1;
+    fetchData();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fetchData();
+    });
+  }
+
+  void fetchData() async {
+    itemModels = await dataBaseService.getItems();
+    setState(() {});
   }
 
   @override
@@ -104,7 +80,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 4.0),
-                child: AllProducts(),
+                child: AllProducts(itemModels: itemModels),
               )
             ],
           ),
@@ -131,7 +107,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
               return UserInformationView(
-                userModel: userModel,
+                userModel: dataBaseService.userModel,
               );
             },
           ));
