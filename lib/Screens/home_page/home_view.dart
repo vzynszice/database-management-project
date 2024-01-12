@@ -13,16 +13,15 @@ import 'package:vtproje/Screens/user/view/user_information_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView(
-      {super.key, required this.dataBaseService, required this.userModel});
-  final DataBaseService dataBaseService;
+      {super.key, required this.userModel, required this.dataBaseService});
   final UserModel userModel;
+  final DataBaseService dataBaseService;
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   late final TabController _tabController;
-  //final PageController _pageController = PageController(initialPage: 1);
   List<String> imagePaths = [
     "assets/images/vase.jpg",
     "assets/images/vase_hanmade.jpg",
@@ -32,6 +31,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   final key = GlobalKey();
   FocusNode focusNodeTextFieldOne = FocusNode();
   FocusNode focusNodeTextFieldTwo = FocusNode();
+
   @override
   void initState() {
     super.initState();
@@ -44,14 +44,11 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      fetchData();
-    });
+    fetchData();
   }
 
   void fetchData() async {
-    itemModels = await widget.dataBaseService.getItems();
+    itemModels = await widget.dataBaseService.getFilteredItems();
     setState(() {});
   }
 
@@ -81,7 +78,10 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 4.0),
-                child: AllProducts(itemModels: itemModels),
+                child: AllProducts(
+                  itemModels: itemModels,
+                  dataBaseService: widget.dataBaseService,
+                ),
               )
             ],
           ),
@@ -92,6 +92,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
 
   TabBar _myTabView() {
     return TabBar(
+      isScrollable: false,
       padding: EdgeInsets.zero,
       indicatorColor: ColorConstants.orangeColor,
       controller: _tabController,
@@ -102,8 +103,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
               return HomeView(
-                dataBaseService: widget.dataBaseService,
                 userModel: widget.userModel,
+                dataBaseService: widget.dataBaseService,
               );
             },
           ));
@@ -111,15 +112,17 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
               return UserInformationView(
-                userModel: widget.userModel,
                 dataBaseService: widget.dataBaseService,
+                userModel: widget.userModel,
               );
             },
           ));
         } else if (index == 2) {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
-              return const ShoppingCartView();
+              return ShoppingCartView(
+                dataBaseService: widget.dataBaseService,
+              );
             },
           ));
         }

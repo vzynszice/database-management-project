@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
 import 'package:vtproje/product/widgets/item_information_view/item_text_widget.dart';
 
-class PaymentButton extends StatelessWidget {
-  const PaymentButton(
-      {Key? key,
-      required this.backgroundColor,
-      required this.buttonText,
-      required this.textColor,
-      required this.onPressed})
-      : super(key: key);
+class PopNavigateButton extends StatelessWidget {
+  const PopNavigateButton({
+    Key? key,
+    required this.backgroundColor,
+    required this.buttonText,
+    required this.textColor,
+  }) : super(key: key);
 
   final Color backgroundColor;
   final Color textColor;
   final String buttonText;
-  final Future<bool> Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,7 @@ class PaymentButton extends StatelessWidget {
             ),
           ),
         ),
-        onPressed: onPressed,
+        onPressed: () => Navigator.pop(context),
         child: Center(
           child: ItemTextWidget(
             textString: buttonText,

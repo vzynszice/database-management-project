@@ -51,6 +51,7 @@ class _LogInButtonState extends State<LogInButton> {
           if (loggedInUser != null) {
             print(
                 loggedInUser.userName); // Assign the loggedInUser to userModel
+            DataBaseService.userModel = loggedInUser;
             Navigator.of(context)
                 .pushReplacement(MaterialPageRoute(builder: (context) {
               return HomeView(

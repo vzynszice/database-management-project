@@ -116,7 +116,7 @@ class _FilterMenuViewState extends State<FilterMenuView> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 20),
-                    child: CustomButton(buttonText: "Apply"),
+                    // child: CustomButton(buttonText: "Apply", onPressed: null),
                   )),
             ],
           )),

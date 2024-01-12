@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vtproje/Database/database_service.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
 import 'package:vtproje/Screens/item/model/item_model.dart';
 import 'package:vtproje/product/widgets/home_view/all_products.dart';
@@ -6,9 +7,10 @@ import 'package:vtproje/product/widgets/login/custom_text_widget.dart';
 import 'package:vtproje/product/widgets/my_products_view/my_products_view_adding.dart';
 
 class MyProductsView extends StatefulWidget {
-  const MyProductsView({super.key, required this.headlineString});
+  const MyProductsView(
+      {super.key, required this.headlineString, required this.dataBaseService});
   final String headlineString;
-
+  final DataBaseService dataBaseService;
   @override
   State<MyProductsView> createState() => _MyProductsViewState();
 }
@@ -32,8 +34,11 @@ class _MyProductsViewState extends State<MyProductsView> {
               context: context,
               isScrollControlled: true,
               builder: (context) {
-                return const FractionallySizedBox(
-                    heightFactor: 0.7, child: MyProductsAddingSheet());
+                return FractionallySizedBox(
+                    heightFactor: 0.7,
+                    child: MyProductsAddingSheet(
+                      dataBaseService: widget.dataBaseService,
+                    ));
               });
         },
       ),
@@ -53,6 +58,7 @@ class _MyProductsViewState extends State<MyProductsView> {
                 padding: const EdgeInsets.only(top: 15, left: 1, right: 1),
                 child: AllProducts(
                   itemModels: [itemModel],
+                  dataBaseService: widget.dataBaseService,
                 ))
           ],
         ),

@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:vtproje/Database/database_service.dart';
 import 'package:vtproje/Screens/constants/color_constants.dart';
 import 'package:vtproje/Screens/constants/padding_constants.dart';
+import 'package:vtproje/Screens/item/model/purchased_item_model.dart';
+import 'package:vtproje/Screens/shopping_cart/shop.dart';
+import 'package:vtproje/product/widgets/item_buying_view/navigate_pop-button.dart';
 import 'package:vtproje/product/widgets/item_information_view/item_text_widget.dart';
 import 'package:vtproje/product/widgets/item_buying_view/payment_buttons.dart';
 import 'package:vtproje/Screens/user/model/user_model.dart';
 
 class ItemBuyView extends StatefulWidget {
-  const ItemBuyView({super.key, required this.userModel});
+  const ItemBuyView(
+      {super.key,
+      required this.userModel,
+      required this.cost,
+      required this.dataBaseService,
+      required this.purchasedItems});
   final UserModel userModel;
+  final DataBaseService dataBaseService;
+  final List<PurchasedItemModel> purchasedItems;
+
+  final double cost;
   @override
   State<ItemBuyView> createState() => _ItemBuyViewState();
 }
@@ -94,20 +107,44 @@ class _ItemBuyViewState extends State<ItemBuyView> {
                   borderRadius: BorderRadius.all(Radius.circular(5))),
             ),
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(top: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                PaymentButton(
+                PopNavigateButton(
                   backgroundColor: ColorConstants.greyTransparent,
                   buttonText: "Cancel",
                   textColor: ColorConstants.orangeColor,
                 ),
                 PaymentButton(
-                    backgroundColor: ColorConstants.orangeColor,
-                    buttonText: "Confirm",
-                    textColor: Colors.white)
+                  textColor: Colors.white,
+                  backgroundColor: ColorConstants.orangeColor,
+                  buttonText: "Confirm",
+                  onPressed: () async {
+                    try {
+                      int costAsInt = widget.cost.toInt();
+                      bool paymentResult = await widget.dataBaseService.payment(
+                        DataBaseService.userModel.userName,
+                        costAsInt,
+                        widget.purchasedItems,
+                      );
+
+                      if (paymentResult) {
+                        print('Payment successful');
+                        Shop.purchasedItems.clear();
+                      } else {
+                        print('Payment failed');
+                      }
+
+                      return paymentResult;
+                    } catch (e) {
+                      print('Error converting widget.cost to int: $e');
+                      // Handle the error (e.g., show an error message, log it, etc.)
+                      return false; // or another value indicating a failed payment
+                    }
+                  },
+                )
               ],
             ),
           )

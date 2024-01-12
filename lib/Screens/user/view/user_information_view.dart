@@ -24,7 +24,7 @@ class _UserInformationViewState extends State<UserInformationView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 30.0, bottom: 10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -33,16 +33,19 @@ class _UserInformationViewState extends State<UserInformationView> {
                     buttonSubline: "Boughts",
                     buttonIcon: Icons.shopping_cart_checkout,
                     index: 0,
+                    dataBaseService: widget.dataBaseService,
                   ),
                   UserInformationButton(
                     buttonSubline: "Solds",
                     buttonIcon: Icons.shopify_outlined,
                     index: 1,
+                    dataBaseService: widget.dataBaseService,
                   ),
                   UserInformationButton(
                     buttonSubline: "My Products",
                     buttonIcon: Icons.window_sharp,
                     index: 2,
+                    dataBaseService: widget.dataBaseService,
                   )
                 ],
               ),
