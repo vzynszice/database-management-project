@@ -79,6 +79,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               Padding(
                 padding: const EdgeInsets.only(left: 4.0),
                 child: AllProducts(
+                  myProductsPage: false,
                   itemModels: itemModels,
                   dataBaseService: widget.dataBaseService,
                 ),

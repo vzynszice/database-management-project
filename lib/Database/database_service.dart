@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:postgres/postgres.dart';
 import 'package:vtproje/Screens/item/model/item_model.dart';
 import 'package:vtproje/Screens/item/model/purchased_item_model.dart';
@@ -12,7 +13,7 @@ class DataBaseService {
       5432, // Port number
       'hobby_market',
       username: 'postgres',
-      password: '365247',
+      password: '3469',
     );
     await _connection.open();
   }
@@ -224,6 +225,47 @@ class DataBaseService {
     }
   }
 
+  Future<List<ItemModel>> getUsersItems(String username) async {
+    try {
+      var query = 'SELECT * from items where item_seller = @username';
+      var itemsResult = await _connection
+          .query(query, substitutionValues: {'username': username});
+      if (itemsResult.isNotEmpty) {
+        List<ItemModel> itemList = [];
+        for (var item in itemsResult) {
+          int itemId = item[0];
+          int itemPrice = item[1];
+          int itemSellCount = item[2];
+          String itemName = item[3];
+          int itemCategoryId = item[4];
+          String itemDescription = item[5];
+          String sellerUsername = item[6];
+          String imagePath = item[7];
+          var currentItem = ItemModel(
+            itemId,
+            itemPrice,
+            itemSellCount,
+            itemName,
+            itemCategoryId,
+            itemDescription,
+            sellerUsername,
+            imagePath,
+          );
+          itemList.add(currentItem);
+        }
+
+        print('Users items: $itemList');
+        return itemList;
+      } else {
+        print("User's ıtems can not fetch");
+        return [];
+      }
+    } catch (e) {
+      print("Error fetching user's items $e");
+      return [];
+    }
+  }
+
   Future<bool> payment(String username, int cost,
       List<PurchasedItemModel> purchasedItems) async {
     try {
@@ -267,6 +309,46 @@ class DataBaseService {
     }
   }
 
+  Future<void> insertNewItem(int itemPrice, int categoryID, String itemName,
+      String itemDescription, String itemSeller, String imagePath) async {
+    try {
+      int item_sellcount = 0;
+      var result = await _connection.query(
+          'INSERT INTO items ( item_price,item_sellcount,item_name, item_category_id,item_description,item_seller,item_image_path) VALUES (@item_price,@item_sellcount,@item_name,@item_category_id,@item_description,@item_seller,@item_image_path)',
+          substitutionValues: {
+            'item_price': itemPrice,
+            'item_sellcount': item_sellcount,
+            'item_name': itemName,
+            'item_category_id': categoryID,
+            'item_description': itemDescription,
+            'item_seller': itemSeller,
+            'item_image_path': imagePath
+          });
+      if (result.isNotEmpty) {
+        print("Item inserted successfully");
+      }
+    } catch (e) {
+      print("Error inserting item $e");
+    }
+  }
+
+  Future<void> deleteItem(int itemID) async {
+    try {
+      var result = await _connection.query(
+        'DELETE FROM items WHERE item_id = @item_id',
+        substitutionValues: {'item_id': itemID},
+      );
+
+      if (result.isNotEmpty) {
+        print("Item deleted successfully");
+      } else {
+        print("Item with item_id $itemID not found");
+      }
+    } catch (e) {
+      print("Error deleting item: $e");
+    }
+  }
+
   Future<void> insertPurchasedItem(int itemId, String username, int num) async {
     try {
       await _connection.query(
@@ -290,6 +372,93 @@ class DataBaseService {
     }
   }
 
+  Future<List<ItemModel>> getPurchasedItems(String username) async {
+    try {
+      var itemsResult = await _connection.query(
+        'SELECT * from items where item_id in (select purchased_item_id from purchased_items where buyer_username=@username)',
+        substitutionValues: {
+          'username': username,
+        },
+      );
+      if (itemsResult.isNotEmpty) {
+        List<ItemModel> itemList = [];
+        for (var item in itemsResult) {
+          int itemId = item[0];
+          int itemPrice = item[1];
+          int itemSellCount = item[2];
+          String itemName = item[3];
+          int itemCategoryId = item[4];
+          String itemDescription = item[5];
+          String sellerUsername = item[6];
+          String imagePath = item[7];
+          var currentItem = ItemModel(
+            itemId,
+            itemPrice,
+            itemSellCount,
+            itemName,
+            itemCategoryId,
+            itemDescription,
+            sellerUsername,
+            imagePath,
+          );
+          itemList.add(currentItem);
+        }
+
+        print('Bought items: $itemList');
+        return itemList;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      print('Error getting purchased items: $e');
+      return [];
+    }
+  }
+
+  Future<List<ItemModel>> getSoldItems(String username) async {
+    try {
+      var itemsResult = await _connection.query(
+        'SELECT * from items where item_id in (select purchased_item_id from purchased_items) and item_seller=@username',
+        substitutionValues: {
+          'username': username,
+        },
+      );
+      if (itemsResult.isNotEmpty) {
+        List<ItemModel> itemList = [];
+        for (var item in itemsResult) {
+          int itemId = item[0];
+          int itemPrice = item[1];
+          int itemSellCount = item[2];
+          String itemName = item[3];
+          int itemCategoryId = item[4];
+          String itemDescription = item[5];
+          String sellerUsername = item[6];
+          String imagePath = item[7];
+          var currentItem = ItemModel(
+            itemId,
+            itemPrice,
+            itemSellCount,
+            itemName,
+            itemCategoryId,
+            itemDescription,
+            sellerUsername,
+            imagePath,
+          );
+          itemList.add(currentItem);
+        }
+
+        print('Bought items: $itemList');
+        return itemList;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      print('Error getting purchased items: $e');
+      return [];
+    }
+  }
+
+  Future<void> getMaxSoldItem() async {}
   Future<ItemModel?> getItemInfo(int id) async {
     try {
       var item = await _connection.query(
@@ -344,14 +513,18 @@ class DataBaseService {
     }
   }
 
-  Future<void> updateChanges(
-      UserModel userModel, int index, String value) async {
+  Future<void> updateChanges(UserModel userModel, int index, String value,
+      BuildContext context) async {
     try {
       if (index == 0) {
-        await _connection.query(
-            'UPDATE users SET username= @username WHERE username <> @username',
-            substitutionValues: {'username': value});
-        print("username updated");
+        return showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const AlertDialog(
+                title: Text("Güncelleme Hatası!"),
+                content: Text("Kullanıcı adı güncellenemez"),
+              );
+            });
       } else if (index == 1) {
         await _connection.query(
             'UPDATE users SET phone_number= @phone_number WHERE phone_number <> @phone_number and username=@username',

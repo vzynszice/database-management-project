@@ -40,10 +40,7 @@ class MyApp extends StatelessWidget {
     dataBaseService.connectToDatabase();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeView(
-        userModel: DataBaseService.userModel,
-        dataBaseService: dataBaseService,
-      ),
+      home: LogInView(dataBaseService: dataBaseService),
     );
   }
 }
