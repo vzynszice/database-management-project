@@ -19,6 +19,7 @@ class _ShoppingListItemWidgetState extends State<ShoppingListItemWidget> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+<<<<<<< Updated upstream
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -60,6 +61,31 @@ class _ShoppingListItemWidgetState extends State<ShoppingListItemWidget> {
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 12,
+=======
+      child: InkWell(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ItemInformationView(
+                dataBaseService: dataBaseService,
+                itemModel: widget.purchasedItemModel.item,
+                userModel: DataBaseService.userModel),
+          ),
+        ),
+        child: Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              color: Colors.white),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                    widget.purchasedItemModel.item.imagePath,
+                    height: 100,
+                    width: 100,
+>>>>>>> Stashed changes
                   ),
                   child:
                       CustomTextWidget(textString: "${quantity}", fontSize: 15),

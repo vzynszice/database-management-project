@@ -8,16 +8,44 @@ import 'package:vtproje/Screens/user/model/user_model.dart';
 
 class ItemInformationView extends StatefulWidget {
   const ItemInformationView(
-      {super.key, required this.itemModel, required this.userModel});
+      {super.key,
+      required this.itemModel,
+      required this.userModel,
+      required this.dataBaseService});
   final ItemModel itemModel;
   final UserModel userModel;
+  final DataBaseService dataBaseService;
+
   @override
   State<ItemInformationView> createState() => _ItemInformationViewState();
 }
 
 class _ItemInformationViewState extends State<ItemInformationView> {
   @override
+<<<<<<< Updated upstream
+=======
+  void initState() {
+    super.initState();
+    updateSellCount();
+  }
+
+  int quantity = 1;
+
+  void updateSellCount() async {
+    int? sellCount =
+        await widget.dataBaseService.getItemSellCount(widget.itemModel.id);
+
+    if (sellCount != null) {
+      setState(() {
+        widget.itemModel.sellCount = sellCount;
+      });
+    }
+  }
+
+  @override
+>>>>>>> Stashed changes
   Widget build(BuildContext context) {
+    updateSellCount();
     return Scaffold(
       backgroundColor: ColorConstants.orangeColor,
       appBar: AppBar(

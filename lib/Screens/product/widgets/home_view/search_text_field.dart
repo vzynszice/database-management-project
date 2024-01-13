@@ -12,12 +12,9 @@ class SearchTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      child: TextField(
-        focusNode: focusNodeTextFieldOne,
-        decoration: InputDecorators("").emailInput(),
-      ),
+    return TextField(
+      focusNode: focusNodeTextFieldOne,
+      decoration: InputDecorators("").emailInput(),
     );
   }
 }

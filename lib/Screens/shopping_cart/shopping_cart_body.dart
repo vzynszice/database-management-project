@@ -79,7 +79,32 @@ class ShoppingCartBody extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15),
+<<<<<<< Updated upstream
                   child: CustomButton(buttonText: "Checkout"),
+=======
+                  child: InkWell(
+                    onTap: () async {
+                      bool purchaseResult = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ItemBuyView(
+                            purchasedItems: widget.purchasedItems,
+                            userModel: DataBaseService.userModel,
+                            cost: total,
+                            dataBaseService: widget.dataBaseService,
+                          ),
+                        ),
+                      );
+
+                      if (purchaseResult != null && purchaseResult) {
+                        setState(() {});
+                      }
+                    },
+                    child: CustomButton(
+                      buttonText: "Checkout",
+                    ),
+                  ),
+>>>>>>> Stashed changes
                 )
               ],
             ),

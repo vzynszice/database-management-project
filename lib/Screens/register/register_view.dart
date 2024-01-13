@@ -32,7 +32,7 @@ class RegisterView extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  height: 250,
+                  height: 300,
                   width: 300,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
