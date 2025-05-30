@@ -31,12 +31,10 @@ Hobby Market is a simple mobile e-commerce application where users can buy and s
 - purchased_items: Purchased items
 
 ## 🚀 Installation Instructions
-1. Required Environment
-Flutter SDK must be installed
-
-PostgreSQL must be installed and running
-
-A database (hobby_market) must be created locally
+1. Required Environment:
+  - Flutter SDK must be installed
+  - PostgreSQL must be installed and running
+  - A database (hobby_market) must be created locally
 
 2. Database Settings
 Update the settings in the DatabaseService class for the database connection according to your environment.
